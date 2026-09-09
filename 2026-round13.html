@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이탈리아 그랑프리 — 2026-09-06</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#da291c;
+    --primary-active:#b01e0a;
+    --ink:#ffffff;
+    --body:#969696;
+    --body-strong:#ffffff;
+    --body-readability:#a5a5a5;
+    --hairline:#303030;
+    --hairline-2:#3d3d3d;
+    --canvas:#181818;
+    --canvas-elevated:#303030;
+    --on-primary:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--canvas);
+    color:var(--body-readability);
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    text-shadow:0 0 1px rgba(255,255,255,0.01);
+    line-height:1.65;
+    font-size:15px;
+    letter-spacing:-0.02em;
+    word-break:keep-all;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 96px;}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    padding:64px 24px 48px;
+    border-bottom:1px solid var(--hairline);
+    border-top:3px solid var(--primary);
+    background:var(--canvas);
+  }
+  .hero-inner{max-width:760px;margin:0 auto;}
+  .hero-kicker{
+    font-size:11px;
+    color:var(--body);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .hero h1{
+    font-size:48px;
+    line-height:1.2;
+    margin:16px 0 8px;
+    font-weight:600;
+    letter-spacing:-1px;
+    color:var(--ink);
+  }
+  .hero .sub{color:var(--body);font-size:15px;margin-bottom:32px;}
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+  }
+  .hero-stat{background:var(--canvas-elevated);padding:16px;}
+  .hero-stat .k{font-size:11px;color:var(--body);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+  .hero-stat .v{font-size:15px;font-weight:600;color:var(--body-strong);}
+  @media (max-width:640px){
+    .hero h1{font-size:32px;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* Nav */
+  .toc{
+    display:flex;
+    align-items:center;
+    height:64px;
+    overflow-x:auto;
+    border-bottom:1px solid var(--hairline);
+    background:var(--canvas);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .toc a{
+    flex:0 0 auto;
+    padding:0 18px;
+    height:64px;
+    display:flex;
+    align-items:center;
+    color:var(--body);
+    text-decoration:none;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    white-space:nowrap;
+    border-bottom:2px solid transparent;
+  }
+  .toc a:hover{color:var(--ink);border-bottom-color:var(--primary);}
+  .toc-track{display:flex;max-width:760px;margin:0 auto;width:100%;}
+
+  section{padding:64px 0;border-bottom:1px solid var(--hairline);scroll-margin-top:64px;}
+  section:last-of-type{border-bottom:none;}
+  h2{
+    font-size:24px;
+    color:var(--ink);
+    font-weight:600;
+    letter-spacing:-0.3px;
+    margin:0 0 32px;
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+  }
+  h2 .num{
+    color:var(--primary);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.5px;
+  }
+  h3{font-size:18px;margin:48px 0 16px;font-weight:600;color:var(--body-strong);letter-spacing:-0.3px;}
+  p{margin:0 0 16px;}
+  .lede{color:var(--body);font-size:15px;}
+
+  /* Circuit link -> button-primary */
+  .circuit-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    height:48px;
+    padding:14px 32px;
+    background:var(--primary);
+    border:none;
+    color:var(--on-primary);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin:8px 0 32px;
+  }
+  .circuit-link:hover{background:var(--primary-active);}
+
+  /* Circuit image (when a local asset is available, replaces the circuit-link button) */
+  .circuit-image{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:8px 0 12px;
+    border:1px solid var(--hairline);
+  }
+  .circuit-image-caption{margin:0 0 32px;font-size:13px;}
+  .circuit-image-caption a{color:var(--body);text-decoration:none;}
+  .circuit-image-caption a:hover{color:var(--primary);}
+
+  /* Info table (key/value) */
+  table.kv{width:100%;border-collapse:collapse;margin:8px 0 24px;}
+  table.kv tr{border-bottom:1px solid var(--hairline);}
+  table.kv tr:last-child{border-bottom:none;}
+  table.kv td{padding:12px 0;vertical-align:top;font-size:14.5px;}
+  table.kv td:first-child{width:150px;color:var(--body);padding-right:16px;}
+
+  /* Data tables (updates, results, penalties) */
+  .tbl-wrap{overflow-x:auto;margin:8px 0 24px;}
+  table.data{width:100%;border-collapse:collapse;font-size:14px;min-width:520px;}
+  table.data th{
+    text-align:left;
+    padding:12px;
+    background:var(--canvas-elevated);
+    color:var(--body);
+    font-weight:600;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    border-bottom:1px solid var(--hairline);
+  }
+  table.data td{
+    padding:14px 12px;
+    border-bottom:1px solid var(--hairline);
+    vertical-align:top;
+  }
+  table.data tr:last-child td{border-bottom:none;}
+  table.data tr:hover td{background:var(--canvas-elevated);}
+  .pos{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums;}
+  .pt{font-variant-numeric:tabular-nums;color:var(--primary);font-weight:700;}
+  .driver{display:block;font-weight:600;white-space:nowrap;color:var(--body-strong);}
+  .driver .team{display:block;font-size:12px;color:var(--body);font-weight:400;margin-top:2px;white-space:nowrap;}
+
+  table.penalties{min-width:640px;}
+  table.penalties th:first-child, table.penalties td:first-child{width:150px;}
+  table.results th:nth-child(2), table.results td:nth-child(2){width:140px;}
+
+  table.updates{min-width:680px;}
+  table.updates th:first-child, table.updates td:first-child{
+    width:120px;
+    white-space:nowrap;
+    font-weight:700;
+  }
+  table.updates th:last-child, table.updates td:last-child{width:200px;}
+
+  /* Sticky first column(s) for mobile horizontal scroll */
+  table.updates th:first-child, table.updates td:first-child{
+    position:sticky;
+    left:0;
+    z-index:2;
+    border-right:1px solid var(--hairline-2);
+  }
+  table.penalties th:first-child, table.penalties td:first-child{
+    position:sticky;
+    left:0;
+    z-index:2;
+    border-right:1px solid var(--hairline-2);
+  }
+  table.results th:first-child, table.results td:first-child{
+    width:44px;
+    position:sticky;
+    left:0;
+    z-index:2;
+  }
+  table.results th:nth-child(2), table.results td:nth-child(2){
+    position:sticky;
+    left:44px;
+    z-index:2;
+    border-right:1px solid var(--hairline-2);
+  }
+
+  ul.feat{margin:0 0 8px;padding-left:20px;}
+  ul.feat li{margin-bottom:12px;}
+  ul.feat ul{margin-top:8px;}
+  ul.feat ul li{margin-bottom:8px;color:var(--body);font-size:14.5px;}
+  ul.feat ul li b{color:var(--body-strong);}
+
+  /* Timeline */
+  .penalty-note{color:var(--body);font-size:14px;margin:16px 0 0;}
+  ol.timeline{list-style:none;margin:24px 0 0;padding:0;}
+  ol.timeline li{
+    position:relative;
+    padding:0 0 32px 32px;
+    border-left:1px solid var(--hairline);
+    margin-left:11px;
+  }
+  ol.timeline li:last-child{border-left:1px solid transparent;padding-bottom:0;}
+  ol.timeline li::before{
+    content:attr(data-icon);
+    position:absolute;
+    left:-15px;top:-2px;
+    width:22px;height:22px;
+    font-size:13px;
+    line-height:22px;
+    text-align:center;
+    background:var(--canvas-elevated);
+    border:1px solid var(--hairline-2);
+  }
+  ol.timeline b{color:var(--body-strong);}
+  .final-note{
+    margin-top:24px;
+    padding:16px;
+    background:var(--canvas-elevated);
+    border-left:2px solid var(--primary);
+    color:var(--body);
+    font-size:13.5px;
+  }
+
+  /* Quotes / issues */
+  details.issue{
+    background:var(--canvas-elevated);
+    border:1px solid var(--hairline-2);
+    margin-bottom:16px;
+    padding:24px;
+  }
+  details.issue summary{
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    color:var(--body-strong);
+    list-style:none;
+  }
+  details.issue summary::-webkit-details-marker{display:none;}
+  details.issue summary::before{
+    content:"+";
+    color:var(--primary);
+    font-weight:700;
+    margin-right:10px;
+    display:inline-block;
+  }
+  details.issue[open] summary::before{content:"–";}
+  details.issue .issue-lede{color:var(--body);font-size:14px;margin-top:12px;}
+  .speaker{margin-top:24px;}
+  .speaker .who{font-weight:600;font-size:14.5px;margin-bottom:8px;color:var(--body-strong);}
+  blockquote{
+    margin:0 0 8px;
+    padding:12px 16px;
+    border-left:2px solid var(--hairline-2);
+    background:var(--canvas);
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .tr{color:var(--body);font-size:13.5px;margin:8px 0 8px;}
+  .summary{font-size:14px;}
+  .summary b{color:var(--body-strong);font-weight:600;}
+  .src{color:var(--body);font-size:12px;text-transform:uppercase;letter-spacing:0.3px;}
+  .verdict{
+    margin-top:16px;padding-top:16px;border-top:1px solid var(--hairline-2);
+    font-size:14px;color:var(--body);
+  }
+
+  /* links */
+  .linklist{padding-left:0;margin:8px 0;list-style:none;}
+  .linklist li{padding:12px 0;border-bottom:1px solid var(--hairline);font-size:14px;}
+  .linklist li:last-child{border-bottom:none;}
+  .linklist a{color:var(--ink);text-decoration:none;}
+  .linklist a:hover{color:var(--primary);}
+  .linklist .domain{color:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-top:4px;}
+
+  /* Vertical entry list (mobile-first, replaces wide tables) */
+  .entry-list{margin-top:8px;}
+  .entry{padding:20px 0;border-bottom:1px solid var(--hairline);}
+  .entry:last-child{border-bottom:none;}
+  .entry-head{font-size:16px;font-weight:700;margin-bottom:10px;}
+  .entry-body{font-size:14.5px;color:var(--body-readability);margin-bottom:8px;}
+  .entry-tag{font-size:14.5px;font-weight:700;color:var(--body-strong);margin-bottom:8px;}
+  .entry-note{font-size:12.5px;color:var(--body);}
+  .entry-head .team-tag{font-size:12px;font-weight:400;color:var(--body);margin-left:8px;}
+
+  /* Compact result rows */
+  .result-list{margin-top:8px;}
+  .result-row{padding:12px 0;border-bottom:1px solid var(--hairline);}
+  .result-row:last-child{border-bottom:none;}
+  .result-main{display:flex;align-items:baseline;gap:12px;}
+  .result-main .pos{flex:0 0 30px;font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums;font-size:13px;}
+  .result-main .who{flex:1 1 auto;font-weight:600;color:var(--body-strong);font-size:14.5px;}
+  .result-main .who .team{color:var(--body);font-weight:400;font-size:12.5px;margin-left:6px;}
+  .result-main .pts{flex:0 0 auto;font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums;font-size:14.5px;}
+  .result-note{margin-top:6px;font-size:12.5px;color:var(--body);padding-left:42px;}
+
+  footer{padding:48px 0;color:var(--body);font-size:12px;text-transform:uppercase;letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">FORMULA 1 · ROUND 13 · MONZA</div>
+    <h1>이탈리아 그랑프리</h1>
+    <div class="sub">2026-09-06 (일) · Autodromo Nazionale di Monza · 브리핑 작성 기준: 레이스 종료 후 약 12시간</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="k">우승자</div><div class="v">안토넬리 (Mercedes)</div></div>
+      <div class="hero-stat"><div class="k">그리드</div><div class="v">19위 → 1위</div></div>
+      <div class="hero-stat"><div class="k">레이스 거리</div><div class="v">53랩 (약 307.0km)</div></div>
+      <div class="hero-stat"><div class="k">시즌</div><div class="v">13R / 23R</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="toc-track">
+    <a data-target="circuit">서킷 소개</a>
+    <a data-target="updates">기술 업데이트</a>
+    <a data-target="results">결과</a>
+    <a data-target="timeline">타임라인</a>
+    <a data-target="quotes">발언 모음</a>
+    <a data-target="links">참고 링크</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="circuit">
+    <h2><span class="num">01</span>🏛️ 아우토드로모 나치오날레 디 몬차 — '속도의 신전'</h2>
+    <img src="https://yontaeng.github.io/f1-newsletter-pages/assets/circuits/monza.avif" alt="서킷 지도" class="circuit-image"><p class="circuit-image-caption"><a href="https://www.formula1.com/en/racing/2026/italy" target="_blank" rel="noopener">F1.com에서 서킷 정보 더 보기</a></p>
+<table class="kv">
+  <tr><td>위치</td><td>이탈리아 몬차 (밀라노 북동쪽, 몬차 왕립공원 안)</td></tr>
+  <tr><td>개장</td><td>1922년 9월 3일 — 단 110일 만에 완공. 브루클랜즈·인디애나폴리스에 이은 세계 세 번째 상설 레이스 트랙</td></tr>
+  <tr><td>F1 개최 역사</td><td>1950년 F1 원년 캘린더부터 개최. 이후 단 한 해(1980년, 이몰라 개최)를 제외하고 매년 이탈리아 GP를 열어온 최장수 개최지</td></tr>
+  <tr><td>트랙 / 코너</td><td>5.793 km · 11개 코너 (우코너 7 / 좌코너 4)</td></tr>
+  <tr><td>레이스 거리</td><td>53랩 · 306.720 km</td></tr>
+  <tr><td>별명</td><td>'속도의 신전(Temple of Speed)', 현지에서는 '라 피스타 마지카(La Pista Magica, 마법의 트랙)'</td></tr>
+</table>
+<h3>서킷 특징</h3>
+<ul class="feat">
+  <li><b>기본 성격</b>: 긴 직선 + 짧고 강한 브레이킹 시케인의 반복. 랩의 대부분을 전개(full throttle) 상태로 보내기 때문에 다운포스를 최소로 깎아 최고속을 확보하는 게 정석입니다. 2024년 폴랩 평균속도가 시속 263km에 달할 정도로 캘린더에서 가장 빠른 서킷입니다.</li>
+  <li><b>2026 규정에서 달라진 점</b>: 액티브 에어로(스트레이트 라인 모드)가 도입되면서 직선에서 윙이 스스로 눕습니다. 예전처럼 '몬차 전용 초저다운포스 윙'을 따로 제작할 필요가 줄었고, 대신 팀들은 스트레이트 모드의 작동 범위와 자잘한 부착물 제거로 효율을 다툽니다. 더 중요한 변수는 <b>에너지 디플로이먼트</b> — 전기 출력이 전체의 절반을 차지하는 2026 파워유닛에서, 긴 직선 끝까지 전기 파워를 얼마나 유지하느냐가 곧 순위입니다.</li>
+  <li><b>다운포스 / 파워유닛 민감도</b>: 다운포스 민감도는 캘린더에서 가장 낮고, 파워유닛(특히 에너지 운용 효율) 민감도는 가장 높은 축. 브레이킹 존이 낮은 속도에서 끝나 프런트 액슬 부담은 덜한 대신, 풀 출력으로 빠져나가는 트랙션 구간에서 리어 부담이 큽니다.</li>
+  <li><b>추월 난이도</b>: 캘린더에서 손꼽히게 쉬운 편. 긴 직선 + 슬립스트림 + 무거운 브레이킹 존 조합이라 뒤차가 붙어서 공격할 각이 많습니다. 그래서 그리드 페널티를 소화하기에 가장 '저렴한' 트랙으로 자주 선택됩니다. 피트스톱 손실은 그린 플래그 기준 약 25초 수준.</li>
+  <li><b>퀄리파잉의 특수성</b>: 앞차의 슬립스트림(견인)이 랩타임에 직접적으로 기여하기 때문에, 예선에서 '누가 누구 앞에 서느냐'를 두고 팀 간 눈치싸움이 벌어집니다. 반대로 너무 붙으면 난기류로 오히려 손해라 간격 조절이 예민합니다.</li>
+  <li><b>상징성</b>: 페라리의 홈 그랑프리. 관중석과 메인 스트레이트를 붉게 채우는 티포시(Tifosi) 문화, 레이스 후 트랙 침입 세리머니, 스트레이트 위에 떠 있는 독특한 형태의 시상대가 이 서킷만의 장면입니다.</li>
+  <li><b>주요 코너</b>
+    <ul>
+      <li><b>T1-2 바리안테 델 레티필로 (첫 시케인)</b>: 시속 300km 이상에서 70~90km대까지 떨어뜨리는 랩 최대 브레이킹 존. 원래 1922년 레이아웃에는 없었고 코너링 속도를 낮추기 위해 1972년에 추가됐으며, 2000년 재설계로 지금의 우-좌 단일 시케인이 됐습니다. 추월 1순위 지점이자 사고 다발 지점.</li>
+      <li><b>T3 쿠르바 그란데</b>: 사실상 전개로 통과하는 완만한 우코너. 여기서 슬립스트림 싸움이 붙어 다음 브레이킹 존의 승부가 결정됩니다.</li>
+      <li><b>T4-5 바리안테 델라 로자</b>: 좌-우 시케인. 인쪽 커브를 얼마나 타넘느냐가 랩타임과 직결되고, 옆차와 나란히 진입하면 접촉 위험이 큽니다.</li>
+      <li><b>T6-7 레스모 1·2</b>: 연속된 두 개의 중고속 우코너. 다운포스를 깎은 차로 통과해야 해서 밸런스가 나쁘면 가장 먼저 티가 나는 구간입니다.</li>
+      <li><b>T8-9-10 바리안테 아스카리</b>: 고속에서 진입하는 좌-우-좌 복합 시케인. 여기 출구 트랙션이 뒤이은 백스트레이트 전체 속도를 좌우해 랩 최대 난도로 꼽힙니다.</li>
+      <li><b>T11 파라볼리카 (쿠르바 알보레토)</b>: 길게 감기는 마지막 우코너. 출구가 메인 스트레이트로 이어지므로 조금만 나가도 다음 랩 전체를 잃습니다. 2021년부터 미켈레 알보레토를 기려 공식 명칭이 부여됐습니다.</li>
+    </ul>
+  </li>
+</ul>
+  </section>
+
+  <section id="updates">
+    <h2><span class="num">02</span>팀별 기술 업데이트 브리핑</h2>
+    <div class="entry-list">
+      <div class="entry"><div class="entry-head" style="color:#00D7B9;">메르세데스</div><div class="entry-body">리어윙에 달려 있던 각종 윙렛 장치를 제거해 항력을 줄였고, 미러 리어 스테이(사이드미러를 차체에 붙잡아주는 지지대)도 짧게 다듬었습니다. 부품 추가가 아니라 '빼기'로 효율을 얻는 전형적인 몬차식 접근입니다. 동시에 안토넬리 차량에 신규 파워유닛 부품을 투입했습니다.</div><div class="entry-note">안토넬리의 부품 교체는 시즌 할당량 초과 → 30계단 그리드 강등. 몬차가 추월이 쉬운 편이라 페널티를 '싸게' 소화할 트랙으로 골랐다는 게 팀 설명입니다. 레이스에서는 메르세데스 PU의 에너지 디플로이먼트(전기 출력을 직선에서 얼마나 오래 뿜어내느냐) 우위가 그대로 드러났습니다.</div></div><div class="entry"><div class="entry-head" style="color:#FF2D2D;">페라리</div><div class="entry-body">ADUO 두 번째 토큰을 써서 업그레이드 파워유닛을 투입했고, 여기에 맞춘 신규 하이브리드 매핑도 함께 적용했습니다. 에어로 쪽은 '드래그 레인지 패키지' — 플로어 보드 수정, 리어 브레이크 덕트 윙렛 제거, 미러 수직 스테이와 사이드포드 연결부 단축, 중앙 슬롯 윙렛의 사이드 윙렛 트리밍, 테일파이프 설치 변경.</div><div class="entry-note">팀 설명은 "모든 변경이 항력 절감을 목표로 했고, 다운포스 감소는 자연스러운 결과지만 이 트랙에서는 유리한 비율". 다만 주말 내내 최고속에서 큰 열세를 보였고, 바쇠르 대표도 직선 속도 부족을 인정했습니다.</div></div><div class="entry"><div class="entry-head" style="color:#3671C6;">레드불</div><div class="entry-body">이번 주말 상대적으로 넓은 범위의 패키지. 프론트윙 엔드플레이트를 다듬어 후방 플로어가 만들어내는 공력 하중을 개선했고, 플로어 '빕(bib)' 가장자리를 수정해 국소 하중과 안정성을 높였습니다. 리어 서스펜션-휠 바디워크와 배기 테일파이프 브래킷은 신뢰성 목적의 변경.</div><div class="entry-note">로슨은 엔진 교체로 35계단 강등, 이후 파크페르메 상태에서 리어윙 어셈블리까지 손대 피트레인 출발. 페르스타펜은 레이스 중 리어 액슬 문제와 디플로이먼트 열세를 계속 호소했습니다.</div></div><div class="entry"><div class="entry-head" style="color:#FF8700;">맥라렌</div><div class="entry-body">새 리어윙(스트레이트 라인 모드에서 플랩 위치를 바꿔 항력 감소폭을 키움)과 하중을 낮춘 빔윙을 조합했고, 플로어 주변 부착물(floor furniture)도 손봤습니다. 헝가리에서 처음 등장한 'H-윙'의 몬차 사양도 함께 투입.</div><div class="entry-note">헝가리에서 대형 패키지를 이미 소화했기 때문에 이번엔 규모가 작은 편. H-윙 명칭은 2010년 F-덕트와 같은 작명 방식(시스템 입구 옆 스폰서 로고의 첫 글자)입니다.</div></div><div class="entry"><div class="entry-head" style="color:#FF6FA8;">알핀</div><div class="entry-body">프론트윙 풋플레이트 베인을 재설계해 국소 하중을 개선하고, 리어윙 페어링 하나를 제거해 항력을 덜어냈습니다. 잔트포르트에서 한 대에만 들어갔던 섀시 업그레이드가 이번 몬차부터 콜라핀토 차량에도 동일하게 적용됐습니다.</div><div class="entry-note">최근 섀시 업그레이드 + 메르세데스 파워유닛 조합이 몬차에서 폭발 — 가슬리가 커리어 첫 폴, 알핀으로서는 17년 만의 폴 포지션.</div></div><div class="entry"><div class="entry-head" style="color:#64C4FF;">윌리엄스</div><div class="entry-body">몬차 전용 3종 세트. 헤일로 형상에 수직 펜스를 추가해 효율을 끌어올렸고, 밸런스 목적의 프론트윙 어셈블리 조정, 플로어 보드 트림을 더했습니다.</div><div class="entry-note">알본은 파워유닛 부품 초과로 20계단 그리드 강등.</div></div><div class="entry"><div class="entry-head" style="color:#6C98D1;">레이싱불스</div><div class="entry-body">리어윙의 스트레이트 모드 작동 메커니즘을 업데이트해 플랩 가동 범위(travel)를 늘렸고, 배기 테일파이프 위치를 옮겨 후방 유동 관리를 개선했습니다. 직선 효율을 정면으로 겨냥한, 가장 '몬차다운' 패키지 중 하나.</div><div class="entry-note">린드블라드 8위 + 츠노다 10위로 더블 입상. 다만 츠노다의 리스타트 건이 아우디의 이의제기 대상이 됐습니다.</div></div><div class="entry"><div class="entry-head" style="color:#D0D3D6;">하스</div><div class="entry-body">개발 관점에서 이번 주말 최대 규모. 신규 플로어에 더해 사이드포드·콜라(coke-line)·엔진커버 바디워크를 함께 바꿨고(에어박스 폭도 좁힘), 리어 서스펜션 페어링과 리어 브레이크 덕트 디플렉터까지 하나의 패키지로 묶었습니다. 여기에 페라리의 ADUO 2 신형 파워유닛도 투입.</div><div class="entry-note">신형 PU는 이번 라운드에서 베어먼만 장착, 오콘은 추후 투입 예정. 오콘은 신규 에어로 부품만 받은 상태에서 Q2 팀메이트 대비 0.7초 뒤졌지만, 본인은 VF-26의 고질적인 에어로 불안정성을 원인으로 지목했습니다. 이 패키지는 몬차보다 다음 마드리드 라운드의 지표로 보는 시각이 많습니다.</div></div><div class="entry"><div class="entry-head" style="color:#2BBE8B;">애스턴마틴</div><div class="entry-body">규모는 작은 편. 프론트 서스펜션 페어링을 수정하고, 리어 타이어 앞쪽 플로어 엣지를 다듬었습니다. 항력 절감보다는 국소 하중 확보가 목적입니다.</div><div class="entry-note">알론소는 퀄리파잉 후 파크페르메 상태에서 에너지스토어(ES)·컨트롤일렉트로닉스(CE)·MGU-K를 교체해 피트레인 출발. 스트롤은 경기 후 "지금 우리에게 필요한 파워가 없다"는 취지로 직선 열세를 인정했습니다.</div></div><div class="entry"><div class="entry-head" style="color:#FF4136;">아우디</div><div class="entry-body">이번 라운드에 제출한 신규 부품이 <b>단 한 건도 없음</b>. 그리드 전체가 효율을 쥐어짜는 주말에 유일하게 업데이트 제로로 나선 팀이었습니다.</div><div class="entry-note">그럼에도 보르톨레토 11위·휠켄베르크 12위로 포인트 문턱까지는 갔고, 결국 츠노다 판정에 대해 이의제기를 통보하는 쪽을 택했습니다.</div></div><div class="entry"><div class="entry-head" style="color:#C9A24B;">캐딜락</div><div class="entry-body">소규모 2건. 전방 플로어 보드 스테이를 수정하고, 디퓨저에 베인을 추가해 하중을 늘렸습니다. 항력을 줄이면 필연적으로 빠지는 리어 하중을 되찾아오는 성격의 업데이트입니다.</div><div class="entry-note">데뷔 시즌 내내 포인트는 아직 0. 몬차에서도 페레스 18위·보타스 19위로 최하위권이었습니다.</div></div>
+    </div>
+  </section>
+
+  <section id="results">
+    <h2><span class="num">03</span>레이스 결과 요약</h2>
+    <div class="result-list">
+      <div class="result-row">
+        <div class="result-main"><span class="pos">1</span><span class="who">안토넬리<span class="team">Mercedes</span></span><span class="pts">267</span></div>
+        <div class="result-note">19위 출발 → 우승. 1966년 루도비코 스카르피오티 이후 60년 만의 이탈리아인 모국 그랑프리 우승이자 시즌 7승째. 패스티스트랩까지 기록. 3랩 남기고 러셀을 추월했습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">2</span><span class="who">러셀<span class="team">Mercedes</span></span><span class="pts">201</span></div>
+        <div class="result-note">레드플래그 이후 하드 타이어 원스톱에 묶였고, 후반 VSC에서 피트인하지 못해 미디엄으로 갈아신은 팀메이트에게 종반 역전당했습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">3</span><span class="who">페르스타펜<span class="team">Red Bull</span></span><span class="pts">127</span></div>
+        <div class="result-note">시즌 5번째 포디움. 레이스 내내 리어 액슬 문제와 메르세데스 대비 디플로이먼트 열세를 호소했습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">4</span><span class="who">노리스<span class="team">McLaren</span></span><span class="pts">171</span></div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">5</span><span class="who">피아스트리<span class="team">McLaren</span></span><span class="pts">116</span></div>
+        <div class="result-note">퀄리파잉 3위였지만 Q2 임페딩으로 3계단 강등돼 6그리드 출발.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">6</span><span class="who">해밀턴<span class="team">Ferrari</span></span><span class="pts">191</span></div>
+        <div class="result-note">1랩 첫 시케인에서 팀메이트와 접촉해 그래블로 밀려나며 10위까지 추락, 이후 6위까지 복귀. 리스타트 타이어 선택을 두고 팀과 이견이 있었습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">7</span><span class="who">가슬리<span class="team">Alpine F1 Team</span></span><span class="pts">41</span></div>
+        <div class="result-note">커리어 첫 폴 포지션(알핀 17년 만의 폴)에서 출발했으나 2랩째 리드를 내준 뒤 서서히 밀려 7위 마무리.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">8</span><span class="who">린드블라드<span class="team">RB F1 Team</span></span><span class="pts">29</span></div>
+        <div class="result-note">콜라핀토의 막판 추격을 2초 차로 막아내고 8위. 최근 안정적인 폼을 이어갔습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">9</span><span class="who">콜라핀토<span class="team">Alpine F1 Team</span></span><span class="pts">21</span></div>
+        <div class="result-note">리스타트에서 페르스타펜을 앞질렀다가 트랙을 벗어나며 16위까지 추락, 이후 9위로 복귀.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">10</span><span class="who">츠노다<span class="team">RB F1 Team</span></span><span class="pts">1</span></div>
+        <div class="result-note">시즌 두 번째 출전(로슨 대체). 레드플래그 리스타트에서 그리드 박스를 잘못 찾아가 추가 포메이션랩을 유발했으나 스튜어드는 무혐의 판정 — 아우디가 이 결정에 이의제기를 통보했습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">11</span><span class="who">보르톨레토<span class="team">Audi</span></span><span class="pts">10</span></div>
+        <div class="result-note">11위로 4연속 입상 행진 마감. 이 1계단 차이가 아우디 이의제기의 배경입니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">12</span><span class="who">휠켄베르크<span class="team">Audi</span></span><span class="pts">6</span></div>
+        <div class="result-note">VSC 때 피트인. 리스타트 직후 로슨과 접촉했고, 이후 로자 시케인 접근 상황도 조사됐으나 추가 조치 없음.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">13</span><span class="who">사인츠<span class="team">Williams</span></span><span class="pts">6</span></div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">14</span><span class="who">로슨<span class="team">Red Bull</span></span><span class="pts">51</span></div>
+        <div class="result-note">피트레인 출발. 9랩에 11위까지 올라섰으나 14랩 휠켄베르크와의 접촉으로 프론트윙을 잃고 피트인, 약 30초를 손해 봤습니다. 블랙앤화이트 플래그(경고) 제시.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">15</span><span class="who">베어먼<span class="team">Haas F1 Team</span></span><span class="pts">18</span></div>
+        <div class="result-note">하스의 대형 에어로 패키지 + 페라리 ADUO 2 신형 파워유닛을 팀 내 유일하게 장착.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">16</span><span class="who">오콘<span class="team">Haas F1 Team</span></span><span class="pts">3</span></div>
+        <div class="result-note">신형 파워유닛 없이 에어로 부품만 적용, 1랩 뒤진 채 완주.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">17</span><span class="who">알본<span class="team">Williams</span></span><span class="pts">5</span></div>
+        <div class="result-note">파워유닛 부품 초과로 20계단 강등 후 20그리드 출발.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">18</span><span class="who">페레스<span class="team">Cadillac F1 Team</span></span><span class="pts">0</span></div>
+        <div class="result-note">FIA 최종 성적표에 '레이스 디렉터 지시 미준수'로 5초 타임 페널티가 기재됐습니다(순위 변동 없음).</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">19</span><span class="who">보타스<span class="team">Cadillac F1 Team</span></span><span class="pts">0</span></div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">R</span><span class="who">스트롤<span class="team">Aston Martin</span></span><span class="pts">0</span></div>
+        <div class="result-note">28랩 유압 계통 문제로 리타이어 — 이 정차가 종반 VSC를 불러왔고, 그게 레이스 승패를 갈랐습니다.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">R</span><span class="who">알론소<span class="team">Aston Martin</span></span><span class="pts">3</span></div>
+        <div class="result-note">파크페르메 하 PU 부품 교체로 피트레인 출발. 7번 코너 커브를 넘으며 차량 손상, 추가 손상을 막기 위해 리타이어.</div>
+      </div>
+      <div class="result-row">
+        <div class="result-main"><span class="pos">R</span><span class="who">르클레르<span class="team">Ferrari</span></span><span class="pts">155</span></div>
+        <div class="result-note">2랩째 파라볼리카 출구에서 그린 페인트 구간을 밟은 뒤 리어를 잃고 타이어 배리어에 강하게 충돌 — 레드플래그의 원인. 다른 차량과의 접촉은 없는 단독 사고였습니다.</div>
+      </div>
+    </div>
+    <p class="lede" style="font-size:13px;">포인트는 이번 라운드 종료 후 기준 시즌 누적 포인트.</p>
+  </section>
+
+  <section id="timeline">
+    <h2><span class="num">04</span>레이스 타임라인</h2>
+    <h3>🏁 레이스 전 — 그리드 페널티 정리 (퀄리파잉 후 확정)</h3>
+    <div class="entry-list">
+      <div class="entry"><div class="entry-head">🔧 안토넬리<span class="team-tag">메르세데스</span></div><div class="entry-tag">30계단 강등 → 19그리드 출발 (예선 7위)</div><div class="entry-note">시즌 할당량을 넘긴 파워유닛 부품 교체. 메르세데스가 계획적으로 선택한 타이밍으로, 추월이 비교적 쉬운 몬차에서 페널티를 소화하고 남은 시즌용 부품 풀을 늘리려는 의도였습니다.</div></div><div class="entry"><div class="entry-head">🔧 로슨<span class="team-tag">레드불</span></div><div class="entry-tag">35계단 강등 + 피트레인 출발</div><div class="entry-note">파워유닛 부품 초과 교체로 먼저 35계단 강등. 이후 퀄리파잉이 끝난 파크페르메 상태에서 리어윙 어셈블리까지 변경해 피트레인 출발로 전환됐습니다.</div></div><div class="entry"><div class="entry-head">🔧 알본<span class="team-tag">윌리엄스</span></div><div class="entry-tag">20계단 강등 → 20그리드 출발</div><div class="entry-note">파워유닛 부품 할당량 초과 장착.</div></div><div class="entry"><div class="entry-head">🔧 알론소<span class="team-tag">애스턴마틴</span></div><div class="entry-tag">피트레인 출발</div><div class="entry-note">퀄리파잉 종료 후 파크페르메 조건에서 에너지스토어(ES)·컨트롤일렉트로닉스(PU-CE)·MGU-K를 교체. 파크페르메는 예선이 끝난 뒤 차를 임의로 손대지 못하게 봉인하는 규정이라, 이를 어기면 그리드가 아닌 피트레인에서 출발해야 합니다.</div></div><div class="entry"><div class="entry-head">⚠️ 피아스트리<span class="team-tag">맥라렌</span></div><div class="entry-tag">3계단 강등 → 예선 3위에서 6그리드로</div><div class="entry-note">Q2에서 첫 시케인 구간을 지나던 로슨의 주행을 방해(임페딩)한 것으로 판정. 이 강등으로 르클레르·해밀턴이 3·4그리드, 페르스타펜이 5그리드로 올라섰습니다.</div></div>
+    </div>
+    <p class="penalty-note">파워유닛 관련 강등이 세 건, 파크페르메 위반에 따른 피트레인 출발이 두 건 겹치면서 그리드가 크게 뒤섞였고, 그 틈에서 가슬리가 커리어 첫 폴을 잡았습니다. 이와 별개로 주말 중 프랙티스 스타트/피트 출구 백색선 관련으로 콜라핀토와 페레스가 각각 견책(reprimand)을 받았습니다 — 그리드 강등은 아니지만, 한 시즌 주행 관련 견책 5회가 쌓이면 자동으로 10계단 강등이 적용됩니다(페레스는 이번이 시즌 3회째).</p>
+
+    <h3>🚦 레이스 진행</h3>
+    <ol class="timeline"><li data-icon="🚦"><b>스타트 (1랩)</b> — 폴시터 가슬리가 선두를 지킨 가운데, 뒤에서 페라리 두 대가 부딪쳤습니다. 해밀턴이 첫 코너 안쪽으로 과감하게 파고들어 2번 코너까지 나란히 갔고, 르클레르가 인쪽 라인을 유지하며 시케인 출구에서 해밀턴이 그래블로 밀려나 10위까지 추락. 해밀턴은 무전으로 "밀려났다"고 항의했지만 이 접촉에 페널티는 부과되지 않았습니다. 스트롤은 1번 코너 전에 두 계단을 잃고 20위로 처졌습니다.</li><li data-icon="🟥"><b>르클레르 대형 크래시 → 레드플래그 (2~3랩)</b> — 르클레르는 잠시 가슬리를 제치고 2위까지 올랐다 다시 자리를 내준 뒤, 2랩째 파라볼리카에서 피아스트리와 나란히 달리며 방어에 성공했습니다. 그러나 코너 바깥쪽 초록색 페인트 구간에 왼쪽 두 바퀴를 올린 순간 리어가 나갔고, 한 번 잡아냈지만 그립이 갑자기 돌아오면서 타이어 배리어로 강하게 날아갔습니다. <b>다른 차와의 접촉은 없는 단독 사고</b>였습니다. 3랩에 세이프티카가 나온 뒤 곧바로 레드플래그.</li><li data-icon="🛞"><b>레드플래그 중 타이어 도박</b> — 배리어 복구가 진행되는 동안 팀들은 리스타트 타이어를 골랐습니다. 하드로 스타트했던 안토넬리는 소수파인 미디엄을 선택했고, 러셀은 하드를 유지. 이 갈림길이 결국 승부를 갈랐습니다. 해밀턴은 하드를 원했지만 미디엄을 받았습니다.</li><li data-icon="🔁"><b>리스타트 절차 혼선 (추가 포메이션랩)</b> — 스탠딩 리스타트를 앞두고 츠노다가 자기 그리드 박스를 지나칠 뻔하다 뒤늦게 방향을 틀어 들어갔고, 레이스 디렉터는 차량 자세가 불안정하다고 판단해 포메이션랩을 한 바퀴 더 돌렸습니다. 레이스는 6랩에 재개.</li><li data-icon="🏎️"><b>리스타트 직후 혼전</b> — 콜라핀토가 스타트에서 페르스타펜을 앞질렀다가 다시 내주고, 곧 트랙을 벗어나며 16위까지 추락. 반대로 츠노다는 1번 코너 안쪽을 파고들어 14위에서 11위로 점프했습니다. 안토넬리는 12위에서 재개.</li><li data-icon="🔍"><b>로슨 vs 휠켄베르크 접촉 (14랩)</b> — 피트레인에서 출발해 9랩에 11위까지 올라온 로슨이 휠켄베르크와 접촉해 프론트윙을 잃고 피트인, 약 30초를 손해 봤습니다. 로슨에게는 블랙앤화이트 플래그(경고)가 제시됐고, 이어진 로자 시케인 진입 상황(휠켄베르크가 두 바퀴를 트랙 밖으로 내보내게 된 건)도 조사됐지만 <b>추가 조치 없음</b>으로 종결됐습니다.</li><li data-icon="⚡"><b>안토넬리의 돌파 (6~16랩)</b> — 미디엄과 메르세데스 PU의 직선 우위를 앞세워 두어 바퀴 만에 6위권, 10랩 전후로 가슬리·노리스·피아스트리를 차례로 정리했습니다. 16랩에 러셀이 페르스타펜을 다시 제치고 선두로 복귀했고, 같은 랩에 안토넬리가 페르스타펜을 잡아 2위로 올라섰습니다. 이때 페르스타펜은 무전으로 리어 액슬이 "완전히 망가졌다"고 보고했습니다.</li><li data-icon="⚔️"><b>메르세데스 내부 12랩 승부</b> — 러셀과 안토넬리가 선두를 여러 차례 주고받는 정면 승부. 팀은 순위 고정 지시를 내리지 않고 두 사람이 겨루게 뒀습니다.</li><li data-icon="🟨"><b>버추얼 세이프티카 (스트롤 리타이어)</b> — 28랩, 스트롤이 유압 문제로 코스에 차를 세우며 VSC 발동. 메르세데스는 안토넬리를 불러 새 미디엄으로 교체했고, 선두 러셀은 쓰던 하드 그대로 트랙에 남겼습니다. VSC 해제 시점의 격차는 약 14~15초. 페르스타펜과 휠켄베르크도 이 타이밍에 피트인했습니다.</li><li data-icon="🔧"><b>알론소 리타이어</b> — 피트레인에서 출발한 알론소는 7번 코너에서 커브를 넘으며 차량 손상을 입었고, 추가 손상을 막기 위해 차를 세웠습니다. 애스턴마틴은 두 대 모두 체커기를 보지 못했습니다.</li><li data-icon="😬"><b>49랩, 아찔한 순간</b> — 새 타이어의 안토넬리가 6랩을 남기고 선두를 따라잡았고, 레티필로 시케인에서 추월을 시도하다 노면이 깨진 구간을 밟고 그래블로 미끄러졌습니다. 같은 상황에서 러셀은 2번 코너를 컷. 두 대 모두 무사히 복귀했고 팀 차원의 사고는 피했습니다.</li><li data-icon="🏆"><b>결승선 (3랩 남기고 역전)</b> — 안토넬리는 곧이어 훨씬 깔끔한 형태로 러셀을 제치고 선두에 올라 그대로 우승. 2위 러셀과 약 4초, 3위 페르스타펜과 약 15초 차였습니다. 안토넬리는 패스티스트랩까지 챙겼고, 1966년 이후 60년 만에 몬차에서 우승한 이탈리아인이 됐습니다.</li><li data-icon="🔍"><b>경기 후 조사 — 츠노다 무혐의</b> — 츠노다의 리스타트 그리드 박스 건이 조사됐습니다. 통상 추가 포메이션랩을 유발한 드라이버는 피트레인 출발 처분을 받지만, 스튜어드는 여러 각도의 영상으로 츠노다가 결국 올바른 위치에 들어갔음을 확인했고, 레이스 컨트롤이 "카 22가 원인"이라고 팀에 통보한 적이 없어 팀이 대응할 수 없었다는 점을 들어 <b>추가 조치 없음</b>으로 결론지었습니다. 츠노다는 10위와 1점을 지켰습니다.</li><li data-icon="⚖️"><b>아우디, 이의제기 통보</b> — 보르톨레토가 11위로 1점 차 밖에 있던 아우디는 규정이 잘못 적용됐다며 FIA에 항소 의사(intention to appeal)를 통보했습니다.</li></ol>
+  </section>
+
+  <section id="quotes">
+    <h2><span class="num">05</span>발언 모음</h2>
+
+    <details class="issue" open><summary>🏆 P19에서 우승 — 그리고 러셀을 놓친 메르세데스의 전략</summary><div class="issue-lede">레드플래그 이후 러셀은 하드 원스톱에 고정됐고, 안토넬리는 종반 VSC에서 새 미디엄을 받았습니다. 같은 팀 두 대가 우승을 놓고 12랩을 싸운 끝에 타이어 차이가 승부를 갈랐고, "팀이 러셀을 지켜줄 수 있었느냐"가 경기 후 최대 쟁점이 됐습니다.</div><div class="speaker"><div class="who">안토넬리 (경기 후 팀 공식 코멘트)</div><blockquote>"This is a day that I will remember forever!"</blockquote><div class="tr">해석: "평생 기억할 하루입니다!"</div><div class="summary"><b>핵심 요약</b> — 커리어에서 가장 특별한 승리라고 표현했고, 메인 스트레이트를 가득 채운 관중에 대한 감사를 강조했습니다. P19에서도 가능하다고 믿었다고 덧붙였습니다.</div><div class="src">출처: GrandPrix247 (팀·드라이버 경기 후 코멘트 모음)</div></div><div class="speaker"><div class="who">러셀 (경기 후 인터뷰 영상)</div><blockquote>"It doesn't feel great but I put it all on the line"</blockquote><div class="tr">해석: "기분이 좋지는 않지만, 저는 모든 걸 걸었습니다."</div><div class="summary"><b>핵심 요약</b> — 패배를 인정하면서도 자기 몫은 다했다는 입장. 파크 페르메에서는 팀메이트에게 축하를 건네는 성숙한 반응을 보였습니다.</div><div class="src">출처: Formula1.com</div></div><div class="speaker"><div class="who">토토 볼프 / 메르세데스 팀 대표 (경기 후, 전략 대안이 있었느냐는 질문에)</div><blockquote>"No chance"</blockquote><div class="tr">해석: "(다른 선택지는) 전혀 없었다."</div><div class="summary"><b>핵심 요약</b> — VSC 시점에 러셀은 하드, 안토넬리는 미디엄이었기 때문에 피트인시킬 수 있는 쪽은 안토넬리뿐이었다는 설명입니다. 러셀 본인도 같은 취지로 말했습니다.</div><div class="src">출처: Crash.net</div></div><div class="speaker"><div class="who">토토 볼프 (Sky Sports F1, VSC 당시 시뮬레이션 결과에 대해)</div><blockquote>"come close but wouldn't catch"</blockquote><div class="tr">해석: "(안토넬리가) 가까이 오긴 해도 잡지는 못한다."</div><div class="summary"><b>핵심 요약</b> — 팀 시뮬레이션은 러셀 전략이 더 빠르다고 계산했지만 실제로는 하드 타이어가 예상보다 빨리 떨어졌습니다. 즉 의도적 차별이라기보다 예측 오차 쪽에 가깝다는 게 팀 설명입니다.</div><div class="src">출처: Sky Sports F1</div></div><div class="speaker"><div class="who">토토 볼프 (경기 후, 49랩 안토넬리의 그래블 이탈에 대해)</div><blockquote>"would have looked like idiots"</blockquote><div class="tr">해석: "(빠져나오지 못했다면) 우리가 바보처럼 보였을 것이다."</div><div class="summary"><b>핵심 요약</b> — 1-2 피니시에도 불구하고 팀 내부 승부의 리스크에 대해서는 분명히 불편함을 드러냈고, 해당 장면을 리뷰하겠다고 밝혔습니다.</div><div class="src">출처: Crash.net</div></div><div class="speaker"><div class="who">토토 볼프 (경기 후, 두 드라이버의 배틀 전반에 대해)</div><blockquote>"could have ended in disaster"</blockquote><div class="tr">해석: "재앙으로 끝날 수도 있었다."</div><div class="summary"><b>핵심 요약</b> — 레이스 엔지니어들에게 개입을 지시할까 고민했지만, 두 드라이버가 "깨끗하되 다소 아슬아슬한" 수준을 유지했다고 판단해 두고 봤다는 설명입니다.</div><div class="src">출처: Yahoo Sports (Motorsport.com 계열 기사 재게재)</div></div><div class="verdict"><b>정리</b> — "팀이 안토넬리를 밀어줬다"는 식의 편애 주장을 뒷받침할 증거는 확인되지 않았습니다. VSC 시점에 두 대를 모두 부를 수 없는 상황이었고 타이어 컴파운드 차이 때문에 안토넬리를 부르는 게 합리적이었다는 팀 설명, 그리고 순위 고정 지시 없이 12랩 동안 정면 승부를 허용한 정황이 함께 존재합니다. 반대로 결과적으로 챔피언십 선두가 이득을 본 것도 사실입니다 — 현재까지 공개된 근거로는 어느 한쪽으로 단정할 수 없습니다.</div></details><details class="issue"><summary>🔴 페라리 내전 — 1랩 팀메이트 접촉과 "규칙이 없다"</summary><div class="issue-lede">홈 그랑프리 1랩 첫 시케인에서 해밀턴이 르클레르 안쪽으로 파고들었고, 출구에서 해밀턴이 그래블로 밀려나 10위까지 떨어졌습니다. 두 랩 뒤 르클레르는 파라볼리카에서 단독 크래시로 리타이어. 페라리는 홈에서 6위 한 대만 남았습니다.</div><div class="speaker"><div class="who">해밀턴 (경기 후 인터뷰, 팀 내 교전 규칙에 대해)</div><blockquote>"no rules"</blockquote><div class="tr">해석: (페라리에는 팀메이트 간) "규칙이 없다."</div><div class="summary"><b>핵심 요약</b> — 팀 내부에 명문화된 교전 수칙이 없다는 취지의 강한 불만 표시. 시즌 후반 챔피언십 구도를 감안하면 페라리가 정리해야 할 사안이 됐습니다.</div><div class="src">출처: Sky Sports F1</div></div><div class="speaker"><div class="who">르클레르 (경기 후 인터뷰)</div><blockquote>"Here, it's true though that we went too far"</blockquote><div class="tr">해석: "여기서는 우리가 너무 나갔던 게 사실입니다."</div><div class="summary"><b>핵심 요약</b> — 접촉 자체가 선을 넘었다고 인정하면서도 '우리'라는 공동 책임 표현을 썼습니다. 동시에 언론이 두 드라이버를 대립 구도로 몬다는 취지의 불만도 밝혔습니다.</div><div class="src">출처: Crash.net</div></div><div class="speaker"><div class="who">해밀턴 (같은 자리에서 르클레르의 '우리'라는 표현에 반박)</div><blockquote>"I was ahead in Turn 2. By the apex, I was ahead."</blockquote><div class="tr">해석: "2번 코너에서 제가 앞서 있었습니다. 에이펙스 시점에 제가 앞이었어요."</div><div class="summary"><b>핵심 요약</b> — 공동 책임이 아니라는 반박. 자신은 항상 공간을 남기는 클린한 레이싱을 해왔다고 강조하며, 나머지는 팀 대표에게 물으라고 했습니다.</div><div class="src">출처: Crash.net (별도 기사)</div></div><div class="speaker"><div class="who">르클레르 (크래시 원인에 대해, 경기 후)</div><blockquote>"way too close"</blockquote><div class="tr">해석: (팀메이트와의 배틀이) "너무 가까웠다."</div><div class="summary"><b>핵심 요약</b> — 크래시에 대해서는 파워를 넣을 때 차가 이상하게 느껴졌다며 데이터 확인이 필요하다는 입장. 원인을 단정하지 않았습니다.</div><div class="src">출처: Formula1.com</div></div><div class="speaker"><div class="who">프레드 바쇠르 / 페라리 팀 대표 (경기 후)</div><blockquote>"Today is a tough day for Ferrari."</blockquote><div class="tr">해석: "오늘은 페라리에게 힘든 하루입니다."</div><div class="summary"><b>핵심 요약</b> — 예선 그리드는 나쁘지 않았지만 최고속에서 큰 열세가 있었고, 방어도 추월도 어려울 것으로 예상했으며 실제로 그보다 더 나빴다고 평가했습니다. 르클레르의 차와 엔진 모두 상태가 좋지 않다고도 밝혔습니다.</div><div class="src">출처: SPEEDWEEK</div></div><div class="verdict"><b>정리</b> — 1랩 접촉에 대해 스튜어드는 어느 쪽에도 페널티를 부과하지 않았습니다. 두 드라이버의 인식이 정면으로 갈리고(르클레르: 공동 책임 / 해밀턴: 자신이 앞서 있었다) 스카이 스포츠 중계진 사이에서도 책임 소재 논쟁이 있었던 만큼, 공식 판정 외에 어느 쪽이 옳다고 단정할 근거는 없습니다.</div></details><details class="issue"><summary>⏱️ 퀄리파잉 견인 드라마 — 사라진 러셀의 폴</summary><div class="issue-lede">몬차에서는 앞차의 슬립스트림(견인)이 랩타임에 결정적입니다. 어차피 강등이 예정돼 있던 안토넬리가 러셀 앞을 달리며 견인을 제공하는 게 메르세데스의 계획이었는데, Q3 마지막 런에서 페르스타펜이 선두로 나서길 피하며 속도를 늦추자 두 메르세데스가 뭉쳐버렸습니다. 러셀은 0.06초 차로 폴을 놓쳤습니다.</div><div class="speaker"><div class="who">토토 볼프 (Sky Sports F1, 예선 직후)</div><blockquote>"he got done over by Max in the final run"</blockquote><div class="tr">해석: "마지막 런에서 막스에게 당했습니다."</div><div class="summary"><b>핵심 요약</b> — 랩을 시작하는 시점에 페르스타펜과 너무 가까웠고 그게 랩타임을 망쳐 폴을 잃었다는 주장입니다.</div><div class="src">출처: Sky Sports F1</div></div><div class="speaker"><div class="who">토토 볼프 (같은 취지, 별도 미디어)</div><blockquote>"I think Max was very clever there."</blockquote><div class="tr">해석: "막스가 거기서 아주 영리했다고 봅니다."</div><div class="summary"><b>핵심 요약</b> — 비난이라기보다 '규정 내에서의 영리한 플레이'로 인정하는 뉘앙스가 섞여 있습니다. 페르스타펜이 속도를 줄여 안토넬리와 러셀을 뭉치게 만들었고 그 결과 두 대 모두 손해를 봤다는 설명.</div><div class="src">출처: RaceFans</div></div><div class="speaker"><div class="who">러셀 (예선 후 공식 기자회견)</div><blockquote>"It was a very scrappy session"</blockquote><div class="tr">해석: "아주 지저분한 세션이었습니다."</div><div class="summary"><b>핵심 요약</b> — 페르스타펜이 브레이크를 밟으며 선두를 피하려 했다고 지적했지만, 동시에 가슬리의 폴에 대해서는 "엄청난 퍼포먼스"라며 축하를 건넸습니다.</div><div class="src">출처: PlanetF1</div></div><div class="speaker"><div class="who">가슬리 (예선 후, 커리어 첫 폴)</div><blockquote>"It was an incredible Qualifying."</blockquote><div class="tr">해석: "믿을 수 없는 퀄리파잉이었습니다."</div><div class="summary"><b>핵심 요약</b> — 9년을 기다린 첫 폴이며, 첫 우승을 거둔 트랙에서 첫 폴까지 따냈다는 점에 특별한 의미를 뒀습니다.</div><div class="src">출처: Formula1.com</div></div><div class="speaker"><div class="who">안토넬리 (예선 후, 견인 역할에 대해)</div><blockquote>"I did what the team asked me here"</blockquote><div class="tr">해석: "여기서는 팀이 요청한 대로 했습니다."</div><div class="summary"><b>핵심 요약</b> — 잔트포르트에서 러셀이 자리를 내준 데 대한 '보답' 성격이라는 인식을 분명히 했고, 상황이 되면 서로 돕는다는 팀 합의를 언급했습니다.</div><div class="src">출처: Crash.net</div></div></details><details class="issue"><summary>🐢 파워유닛 격차 — 페르스타펜의 "거북이" 발언</summary><div class="issue-lede">2026 규정에서 전기 파워 비중이 커지면서 '디플로이먼트(직선에서 전기 출력을 얼마나 길게 유지하느냐)'가 몬차 같은 트랙에서 결정적 변수가 됐습니다. 페르스타펜은 3위 포디움에도 불구하고 이 격차를 강하게 지적했습니다.</div><div class="speaker"><div class="who">페르스타펜 (경기 후)</div><blockquote>"we just can't keep up with the deployment of the Mercedes-powered cars"</blockquote><div class="tr">해석: "우리는 메르세데스 엔진 차량들의 디플로이먼트를 따라갈 수가 없습니다."</div><div class="summary"><b>핵심 요약</b> — 전날부터 있던 차량 문제도 여전했지만, 몬차에서 결정적이었던 건 파워유닛의 에너지 운용 효율 차이였다는 진단입니다.</div><div class="src">출처: Crash.net</div></div><div class="speaker"><div class="who">페르스타펜 (경기 후, 직선에서 추월당하는 느낌에 대해)</div><blockquote>"a lot when people just drive by you like you're a turtle"</blockquote><div class="tr">해석: "사람들이 나를 거북이처럼 지나쳐 갈 때 (전혀 즐겁지 않다)."</div><div class="summary"><b>핵심 요약</b> — 쿠르바 그란데에서 추월당한 뒤 두 번째 시케인에서 늦은 브레이킹으로 바깥쪽으로 되받아치는 식으로 대응했다고 설명했습니다. RB22의 리어 쪽 '차량 열화(car degradation)' 문제도 그대로였다고 밝혔습니다.</div><div class="src">출처: Motorsport.com</div></div></details><details class="issue"><summary>⚖️ 츠노다 무혐의와 아우디의 이의제기</summary><div class="issue-lede">레드플래그 후 스탠딩 리스타트에서 츠노다가 그리드 박스를 늦게 찾아 들어갔고, 레이스 디렉터는 추가 포메이션랩을 지시했습니다. 관례상 원인 제공 드라이버는 피트레인 출발 처분을 받지만 이번엔 그렇게 되지 않았고, 11위였던 아우디가 문제를 제기했습니다.</div><div class="speaker"><div class="who">스튜어드 판정문 (레이스 디렉터 증언 인용)</div><blockquote>"He stated he was not comfortable starting the race"</blockquote><div class="tr">해석: "그(레이스 디렉터)는 그 상태로 레이스를 시작하는 것이 편치 않았다고 진술했다."</div><div class="summary"><b>핵심 요약</b> — 추가 포메이션랩은 레이스 디렉터 본인의 판단이었고, 츠노다가 결국 올바른 박스에 자리를 잡았음이 여러 각도 영상으로 확인됐으며, "카 22가 원인"이라는 통보가 팀에 간 적이 없어 팀이 피트레인 출발로 대응할 기회조차 없었다는 점이 근거였습니다. 결론은 추가 조치 없음.</div><div class="src">출처: Formula1.com (FIA 스튜어드 판정문 인용)</div></div><div class="speaker"><div class="who">아우디 (구단 공식 입장)</div><div class="tr">아우디는 규정이 잘못 적용됐다는 입장에서 FIA에 항소 의사(intention to appeal)를 통보했습니다. 미드필드 컨스트럭터 싸움에서 1점이 걸린 사안입니다.</div><div class="summary"><b>핵심 요약</b> — 판정이 뒤집히면 보르톨레토가 10위로 올라섭니다. 브리핑 작성 시점 기준 절차는 진행 중이며 결론은 나오지 않았습니다.</div><div class="src">출처: PlanetF1 / Formula1.com</div></div></details><details class="issue"><summary>🤜 로슨 vs 휠켄베르크 — "그의 시그니처 무브"</summary><div class="issue-lede">리스타트 직후 1번 코너 접근에서 두 차가 접촉해 로슨이 프론트윙을 잃었고, 이후 로자 시케인 진입에서 휠켄베르크가 두 바퀴를 트랙 밖으로 내보내는 상황이 조사됐습니다. 레이스 디렉터가 이미 블랙앤화이트 플래그를 제시한 상태여서 스튜어드는 추가 조치를 취하지 않았습니다.</div><div class="speaker"><div class="who">휠켄베르크 (경기 후)</div><blockquote>"He never really wants to leave a car's width. It's his signature."</blockquote><div class="tr">해석: "그는 차 한 대 폭을 절대 안 남기려 합니다. 그의 시그니처죠."</div><div class="summary"><b>핵심 요약</b> — "악감정은 없다"고 하면서도, 드라이버 브리핑에서 이런 상황은 엄격히 다루기로 했던 만큼 판정이 아쉽다는 입장. 고속 구간이라 차 안에서 위험하게 느껴졌다고 했습니다.</div><div class="src">출처: The Race</div></div><div class="speaker"><div class="who">로슨 (경기 후)</div><blockquote>"I lost my front wing. So had to box for a new one."</blockquote><div class="tr">해석: "프론트윙이 날아갔습니다. 그래서 새 걸로 갈러 들어가야 했죠."</div><div class="summary"><b>핵심 요약</b> — 그것이 이번 레이스를 망친 결정적 손실이었다는 설명. 휠켄베르크가 자신이 옆에 있다는 걸 인지하지 못했을 수 있다고 봤습니다.</div><div class="src">출처: Speedcafe</div></div><div class="verdict"><b>정리</b> — 스튜어드는 어느 쪽에도 페널티를 부과하지 않았고, 로슨에게 제시된 블랙앤화이트 플래그(경고 성격, 페널티 아님)로 사안이 종결됐습니다.</div></details>
+  </section>
+
+  <section id="links">
+    <h2><span class="num">06</span>참고 링크</h2>
+    <ul class="linklist">
+      <li><a href="https://www.formula1.com/en/latest/article/antonelli-beats-russell-to-italian-grand-prix-win-with-stunning-comeback-drive.15WtFEBT5JEe4drdeO88t2" target="_blank" rel="noopener">Formula1.com – 이탈리아 GP 레이스 리포트: 안토넬리 P19→우승<span class="domain">formula1.com</span></a></li><li><a href="https://www.formula1.com/en/latest/article/gasly-charges-to-sensational-maiden-f1-pole-at-monza-over-russell-and-piastri.4CKkkbvgmqL04ijMNBfuXF" target="_blank" rel="noopener">Formula1.com – 퀄리파잉 리포트: 가슬리 생애 첫 폴<span class="domain">formula1.com</span></a></li><li><a href="https://www.formula1.com/en/latest/article/leclerc-explains-monza-crash-as-he-reacts-to-way-too-close-hamilton-battle.5tBJS6iY8muL6Um6cgcnvS" target="_blank" rel="noopener">Formula1.com – 르클레르가 밝힌 몬차 크래시와 해밀턴과의 배틀<span class="domain">formula1.com</span></a></li><li><a href="https://www.formula1.com/en/latest/article/audi-lodge-intention-to-appeal-over-tsunoda-decision-in-italian-gp.70YzooUbxrwZnGgt98pqRk" target="_blank" rel="noopener">Formula1.com – 아우디, 츠노다 판정에 항소 의사 통보<span class="domain">formula1.com</span></a></li><li><a href="https://www.fia.com/system/files/decision-document/2026_italian_grand_prix_-_final_race_classification.pdf" target="_blank" rel="noopener">FIA – 2026 이탈리아 GP 최종 성적표(스튜어드 문서)<span class="domain">fia.com</span></a></li><li><a href="https://racer.com/2026/09/04/technical-updates-2026-italian-grand-prix" target="_blank" rel="noopener">RACER – 2026 이탈리아 GP 팀별 기술 업데이트 정리<span class="domain">racer.com</span></a></li><li><a href="https://www.motorsportweek.com/2026/09/04/italian-gp-technical-preview-monza/" target="_blank" rel="noopener">Motorsport Week – 몬차 기술 프리뷰: 업그레이드와 페널티<span class="domain">motorsportweek.com</span></a></li><li><a href="https://www.planetf1.com/news/ferrari-second-aduo-power-unit-upgrade-monza" target="_blank" rel="noopener">PlanetF1 – 페라리, ADUO 두 번째 토큰으로 엔진 업그레이드<span class="domain">planetf1.com</span></a></li><li><a href="https://motorsport.com/f1/news/ferraris-aduo-2-upgrade-is-no-game-changer-for-haas-either/10853480/" target="_blank" rel="noopener">Motorsport.com – 하스에게도 ADUO 2 엔진은 '게임체인저'가 아니었다<span class="domain">motorsport.com</span></a></li><li><a href="https://somersf1.substack.com/p/haas-concentrate-on-more-than-just" target="_blank" rel="noopener">Somers F1 – 하스의 대형 패키지와 각 팀 기술 분석<span class="domain">somersf1.substack.com</span></a></li><li><a href="https://www.crash.net/f1/news/1103778/1/f1-2026-italian-grand-prix-full-starting-grid-monza-after-grid-penalties" target="_blank" rel="noopener">Crash.net – 페널티 반영 최종 스타팅 그리드<span class="domain">crash.net</span></a></li><li><a href="https://www.crash.net/f1/news/1103981/1/no-chance-mercedes-explains-strategy-cost-george-russell-monza-f1-win" target="_blank" rel="noopener">Crash.net – 볼프, 러셀 전략에 대해 "선택지가 없었다"<span class="domain">crash.net</span></a></li><li><a href="https://www.crash.net/f1/news/1103997/1/charles-leclerc-blames-media-pushing-ferrari-narrative-after-lewis-hamilton-clash" target="_blank" rel="noopener">Crash.net – 르클레르·해밀턴 1랩 접촉 후 엇갈린 입장<span class="domain">crash.net</span></a></li><li><a href="https://www.skysports.com/f1/news/12433/13582222/lewis-hamilton-claims-there-are-no-rules-at-ferrari-after-clash-with-team-mate-charles-leclerc-during-italian-gp" target="_blank" rel="noopener">Sky Sports – 해밀턴, 페라리에 "규칙이 없다"<span class="domain">skysports.com</span></a></li><li><a href="https://www.skysports.com/f1/news/12433/13582219/italian-gp-did-mercedes-strategy-cost-george-russell-win-at-monza-against-kimi-antonelli" target="_blank" rel="noopener">Sky Sports – 메르세데스 전략이 러셀의 승리를 앗아갔나<span class="domain">skysports.com</span></a></li><li><a href="https://www.racefans.net/2026/09/05/how-clever-verstappen-spoiled-russells-bid-for-pole-in-qualifying-at-monza/" target="_blank" rel="noopener">RaceFans – 페르스타펜이 러셀의 폴 도전을 깨뜨린 방법<span class="domain">racefans.net</span></a></li><li><a href="https://www.planetf1.com/news/george-russell-max-verstappen-toto-wolff-italian-grand-prix-2026-qualifying" target="_blank" rel="noopener">PlanetF1 – 러셀, 페르스타펜에게 "당했다"는 볼프의 진단<span class="domain">planetf1.com</span></a></li><li><a href="https://www.the-race.com/formula-1/kimi-antonelli-f1-italian-gp-recovery-win-pass-on-george-russell/" target="_blank" rel="noopener">The Race – 안토넬리의 몬차 역전승 상세 리캡<span class="domain">the-race.com</span></a></li><li><a href="https://www.the-race.com/formula-1/everything-we-learned-f1-italian-grand-prix-2026/" target="_blank" rel="noopener">The Race – 이탈리아 GP에서 알게 된 것들 (휠켄베르크 코멘트 포함)<span class="domain">the-race.com</span></a></li><li><a href="https://speedcafe.com/f1-news-2026-italian-grand-prix-monza-liam-lawson-nico-hulkenberg-incident-crash-what-happened-update-latest/" target="_blank" rel="noopener">Speedcafe – 로슨이 밝힌 휠켄베르크 접촉과 손실<span class="domain">speedcafe.com</span></a></li><li><a href="https://motorsport.com/f1/news/how-max-verstappen-tried-to-compensate-for-feeling-like-a-turtle-against-mercedes-in-monza/10853173/" target="_blank" rel="noopener">Motorsport.com – 페르스타펜의 "거북이" 발언과 대응법<span class="domain">motorsport.com</span></a></li><li><a href="https://honda.racing/f1/post/f1-2026-rd13-race" target="_blank" rel="noopener">Honda Racing – 애스턴마틴 두 대 리타이어 상세 리포트<span class="domain">honda.racing</span></a></li><li><a href="https://www.speedweek.com/en/a/formula-1/ferrari-weak-leclerc-crash-hamilton-angry-team-principal-vasseur-explains-it" target="_blank" rel="noopener">SPEEDWEEK – 바쇠르가 설명한 페라리의 몬차 부진<span class="domain">speedweek.com</span></a></li><li><a href="https://www.gpfans.com/en/f1-news/1089963/f1-italian-grand-prix-2026-results-final-classification-late-penalties-applied/" target="_blank" rel="noopener">GPFans – 경기 후 페널티 반영 최종 순위<span class="domain">gpfans.com</span></a></li><li><a href="https://www.formula1.com/en/racing/2026/italy" target="_blank" rel="noopener">Formula1.com – 2026 이탈리아 GP 공식 페이지 / 몬차 서킷 정보<span class="domain">formula1.com</span></a></li>
+    </ul>
+  </section>
+
+  <footer>F1 이슈브리핑 · 이탈리아 그랑프리 (아우토드로모 나치오날레 디 몬차) · 2026-09-06</footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.toc a[data-target]').forEach(function(link){
+      link.style.cursor = 'pointer';
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        var target = document.getElementById(link.getAttribute('data-target'));
+        if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  });
+</script>
+</body>
+</html>

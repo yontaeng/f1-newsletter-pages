@@ -1,0 +1,186 @@
+[
+  {
+    "round": "1",
+    "raceName": "Australian Grand Prix",
+    "circuitId": "albert_park",
+    "circuitName": "Albert Park Grand Prix Circuit",
+    "locality": "Melbourne",
+    "country": "Australia"
+  },
+  {
+    "round": "2",
+    "raceName": "Chinese Grand Prix",
+    "circuitId": "shanghai",
+    "circuitName": "Shanghai International Circuit",
+    "locality": "Shanghai",
+    "country": "China"
+  },
+  {
+    "round": "3",
+    "raceName": "Japanese Grand Prix",
+    "circuitId": "suzuka",
+    "circuitName": "Suzuka Circuit",
+    "locality": "Suzuka",
+    "country": "Japan"
+  },
+  {
+    "round": "4",
+    "raceName": "Miami Grand Prix",
+    "circuitId": "miami",
+    "circuitName": "Miami International Autodrome",
+    "locality": "Miami",
+    "country": "USA"
+  },
+  {
+    "round": "5",
+    "raceName": "Canadian Grand Prix",
+    "circuitId": "villeneuve",
+    "circuitName": "Circuit Gilles Villeneuve",
+    "locality": "Montreal",
+    "country": "Canada"
+  },
+  {
+    "round": "6",
+    "raceName": "Monaco Grand Prix",
+    "circuitId": "monaco",
+    "circuitName": "Circuit de Monaco",
+    "locality": "Monte Carlo",
+    "country": "Monaco"
+  },
+  {
+    "round": "7",
+    "raceName": "Barcelona Grand Prix",
+    "circuitId": "catalunya",
+    "circuitName": "Circuit de Barcelona-Catalunya",
+    "locality": "Barcelona",
+    "country": "Spain"
+  },
+  {
+    "round": "8",
+    "raceName": "Austrian Grand Prix",
+    "circuitId": "red_bull_ring",
+    "circuitName": "Red Bull Ring",
+    "locality": "Spielberg",
+    "country": "Austria"
+  },
+  {
+    "round": "9",
+    "raceName": "British Grand Prix",
+    "circuitId": "silverstone",
+    "circuitName": "Silverstone Circuit",
+    "locality": "Silverstone",
+    "country": "UK"
+  },
+  {
+    "round": "10",
+    "raceName": "Belgian Grand Prix",
+    "circuitId": "spa",
+    "circuitName": "Circuit de Spa-Francorchamps",
+    "locality": "Spa",
+    "country": "Belgium"
+  },
+  {
+    "round": "11",
+    "raceName": "Hungarian Grand Prix",
+    "circuitId": "hungaroring",
+    "circuitName": "Hungaroring",
+    "locality": "Budapest",
+    "country": "Hungary"
+  },
+  {
+    "round": "12",
+    "raceName": "Dutch Grand Prix",
+    "circuitId": "zandvoort",
+    "circuitName": "Circuit Park Zandvoort",
+    "locality": "Zandvoort",
+    "country": "Netherlands"
+  },
+  {
+    "round": "13",
+    "raceName": "Italian Grand Prix",
+    "circuitId": "monza",
+    "circuitName": "Autodromo Nazionale di Monza",
+    "locality": "Monza",
+    "country": "Italy"
+  },
+  {
+    "round": "14",
+    "raceName": "Spanish Grand Prix",
+    "circuitId": "madring",
+    "circuitName": "Madring",
+    "locality": "Madrid",
+    "country": "Spain"
+  },
+  {
+    "round": "15",
+    "raceName": "Azerbaijan Grand Prix",
+    "circuitId": "baku",
+    "circuitName": "Baku City Circuit",
+    "locality": "Baku",
+    "country": "Azerbaijan"
+  },
+  {
+    "round": "16",
+    "raceName": "Bahrain Grand Prix in Malaysia",
+    "circuitId": "sepang",
+    "circuitName": "Sepang International Circuit",
+    "locality": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "round": "17",
+    "raceName": "Singapore Grand Prix",
+    "circuitId": "marina_bay",
+    "circuitName": "Marina Bay Street Circuit",
+    "locality": "Marina Bay",
+    "country": "Singapore"
+  },
+  {
+    "round": "18",
+    "raceName": "United States Grand Prix",
+    "circuitId": "americas",
+    "circuitName": "Circuit of the Americas",
+    "locality": "Austin",
+    "country": "USA"
+  },
+  {
+    "round": "19",
+    "raceName": "Mexico City Grand Prix",
+    "circuitId": "rodriguez",
+    "circuitName": "Autódromo Hermanos Rodríguez",
+    "locality": "Mexico City",
+    "country": "Mexico"
+  },
+  {
+    "round": "20",
+    "raceName": "Brazilian Grand Prix",
+    "circuitId": "interlagos",
+    "circuitName": "Autódromo José Carlos Pace",
+    "locality": "São Paulo",
+    "country": "Brazil"
+  },
+  {
+    "round": "21",
+    "raceName": "Las Vegas Grand Prix",
+    "circuitId": "vegas",
+    "circuitName": "Las Vegas Strip Street Circuit",
+    "locality": "Las Vegas",
+    "country": "USA"
+  },
+  {
+    "round": "22",
+    "raceName": "Qatar Grand Prix",
+    "circuitId": "losail",
+    "circuitName": "Losail International Circuit",
+    "locality": "Lusail",
+    "country": "Qatar"
+  },
+  {
+    "round": "23",
+    "raceName": "Abu Dhabi Grand Prix",
+    "circuitId": "yas_marina",
+    "circuitName": "Yas Marina Circuit",
+    "locality": "Abu Dhabi",
+    "country": "UAE"
+  }
+]
